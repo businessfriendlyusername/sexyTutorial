@@ -84,18 +84,30 @@ public class QuestGuide extends Node {
 
     @Override
     public void execute(){
-        if(Interfaces.get(263,1,0).getText().equals(running))
+        if(Interfaces.get(263,1,0).getText().equals(running)) {
+            System.out.println("Toggling run");
             running();
-        else if(Interfaces.get(263,1,0).getText().equals(movingOn))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
+            System.out.println("walking to the quest guide");
             movingOn();
-        else if(Interfaces.get(263,1,0).getText().equals(quests))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(quests)) {
+            System.out.println("Talking to the quest guide");
             quests();
-        else if(Interfaces.get(263,1,0).getText().equals(questJournal))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(questJournal)) {
+            System.out.println("Opening the quest journal");
             questJournal();
-        else if(Interfaces.get(263,1,0).getText().equals(questJournal2))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(questJournal2)) {
+            System.out.println("Talking to the quest guide again");
             questJournal2();
-        else if(Interfaces.get(263,1,0).getText().equals(movingOn2))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(movingOn2)) {
+            System.out.println("Going to the mine");
             movingOn2();
+        }
         General.sleep(800, 1200);
     }
 

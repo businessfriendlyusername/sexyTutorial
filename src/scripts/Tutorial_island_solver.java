@@ -1,5 +1,5 @@
 package scripts;
-import com.sun.tools.hat.internal.model.StackTrace;
+
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.*;
 import org.tribot.api.DynamicClicking;

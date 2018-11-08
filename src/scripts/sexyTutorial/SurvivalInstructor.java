@@ -257,24 +257,42 @@ public class SurvivalInstructor extends Node {
     @Override
     public void execute(){
         //the interface for tutorial island chatbox instructions
-        if(Interfaces.get(263,1,0).getText().equals(movingAround))
+        if(Interfaces.get(263,1,0).getText().equals(movingAround)) {
+            System.out.println("Walking to the survival expert");
             movingAround();
-        else if(Interfaces.get(263, 1, 0).getText().equals(openBackpack))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(openBackpack)) {
+            System.out.println("Opening our backpack");
             openBackpack();
-        else if(Interfaces.get(263, 1, 0).getText().equals(fishing))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(fishing)) {
+            System.out.println("Fishing for some shrimpers");
             fishing();
-        else if(Interfaces.get(263, 1, 0).getText().equals(openStats))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(openStats)) {
+            System.out.println("Opening our stats");
             openStats();
-        else if(Interfaces.get(263, 1, 0).getText().equals(skillsAndExp))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(skillsAndExp)) {
+            System.out.println("talking to bitch about skills");
             skillsAndExp();
-        else if(Interfaces.get(263, 1, 0).getText().equals(woodcutting))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(woodcutting)) {
+            System.out.println("Chopping a tree");
             woodcutting();
-        else if(Interfaces.get(263, 1, 0).getText().equals(firemaking))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(firemaking)) {
+            System.out.println("Lighting a fire");
             firemaking();
-        else if(Interfaces.get(263, 1, 0).getText().equals(cooking))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(cooking)) {
+            System.out.println("Cooking our shrimpers");
             cooking();
-        else if(Interfaces.get(263, 1, 0).getText().equals(movingOn))
+        }
+        else if(Interfaces.get(263, 1, 0).getText().equals(movingOn)) {
+            System.out.println("Walking to the cook");
             movingOn();
+        }
     }
 
     @Override

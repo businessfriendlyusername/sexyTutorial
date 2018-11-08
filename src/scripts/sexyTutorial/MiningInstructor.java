@@ -168,28 +168,39 @@ public class MiningInstructor extends Node {
     private void movingOn(){
         Utils.walkToCombatInstructor(abc);
     }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific helper functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void execute(){
-        if(Interfaces.get(263,1,0).getText().equals(intro))
+        if(Interfaces.get(263,1,0).getText().equals(intro)) {
+            System.out.println("Introducing the mining instructor");
             intro();
-        else if(Interfaces.get(263,1,0).getText().equals(miningTin))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(miningTin)) {
+            System.out.println("Mining some tin");
             miningTin();
-        else if(Interfaces.get(263,1,0).getText().equals(miningCopper))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(miningCopper)) {
+            System.out.println("Mining some copper");
             miningCopper();
-        else if(Interfaces.get(263,1,0).getText().equals(smelting))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(smelting)) {
+            System.out.println("smelting a bronze bar");
             smelting();
-        else if(Interfaces.get(263,1,0).getText().equals(smelting2))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(smelting2)) {
+            System.out.println("talking to the instructor again");
             smelting2();
-        else if(Interfaces.get(263,1,0).getText().equals(smithing))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(smithing)) {
+            System.out.println("making a bronze dagger");
             smithing();
-        else if(Interfaces.get(263,1,0).getText().equals(movingOn))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
+            System.out.println("going to the combat instructor");
             movingOn();
+        }
         General.sleep(800, 1200);
     }
 

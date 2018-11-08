@@ -33,11 +33,11 @@ public class CombatInstructor extends Node {
             "button with a shield and helmet on it. This button lets you view more details on what you have " +
             "equipped. Click on it now.";
 
-    private final String equipmentStats = "<col=0000ff>Equipment stats</col><br>You can see what items you are " +
+    private final String equipDagger = "<col=0000ff>Equipment stats</col><br>You can see what items you are " +
             "wearing in the worn inventory to the left of the screen, with their combined statistics on the right. " +
             "Let's add something. Click your dagger to equip it.";
 
-    private final String equipmentStats2 = "<col=0000ff>Equipment stats</col><br>You're now holding your dagger. " +
+    private final String equipmentStats = "<col=0000ff>Equipment stats</col><br>You're now holding your dagger. " +
             "Clothes, armour, weapons and more are equipped like this. You can unequip items by clicking on them " +
             "in the worn inventory. Speak to the combat instructor to continue.";
 
@@ -87,7 +87,7 @@ public class CombatInstructor extends Node {
         equipStats.click("View equipment stats");
     }
 
-    private void equipmentStats(){
+    private void equipDagger(){
         Utils.walkToCombatInstructor(abc);
         if(Inventory.getCount("Bronze dagger") == 0)
         {
@@ -104,7 +104,7 @@ public class CombatInstructor extends Node {
         dagger[0].click("Wield");
     }
 
-    private void equipmentStats2(){
+    private void equipmentStats(){
         Interfaces.closeAll();
         Utils.walkToCombatInstructor(abc);
         if(Inventory.getAll().length > 20)
@@ -220,16 +220,59 @@ public class CombatInstructor extends Node {
     private void movingOn(){
         Utils.walkToOutsideBank(abc);
     }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific helper functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void execute(){
-        if(Interfaces.get(263,1,0).getText().equals(intro))
+        if(Interfaces.get(263,1,0).getText().equals(intro)) {
+            System.out.println("Introducing the combat instructor");
             intro();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(equipedItems)) {
+            System.out.println("Viewing equiped Items");
+            equipedItems();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(wornInventory)) {
+            System.out.println("Opening worn inventory");
+            wornInventory();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(equipDagger)) {
+            System.out.println("Equipping my fukin dagger");
+            equipDagger();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(equipmentStats)) {
+            System.out.println("Closing interface and talking to the instructor");
+            equipmentStats();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(unequippingItems)) {
+            System.out.println("Equipping sword and shield");
+            unequippingItems();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(combatInterface)) {
+            System.out.println("Opening combat interface");
+            combatInterface();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(combatInterface2)) {
+            System.out.println("Walking to rat cage");
+            combatInterface2();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(attacking)) {
+            System.out.println("attempting to murder a rat");
+            attacking();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(returnToInstructor)) {
+            System.out.println("going back to the instructor");
+            returnToInstructor();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(murderRatRanged)) {
+            System.out.println("shooting this fukin rat dead");
+            murderRatRanged();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
+            System.out.println("going to the next instructor");
+            movingOn();
+        }
 
         General.sleep(800, 1200);
     }

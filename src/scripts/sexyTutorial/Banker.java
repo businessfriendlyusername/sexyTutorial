@@ -24,13 +24,24 @@ public class Banker extends Node {
             "the building. This is the Bank of Gielinor, where you can store all your most valued items. To open " +
             "your bank, just click on the indicated booth.";
 
-    private final String Banking = "<col=0000ff>Banking</col><br>This is your bank. You can store things here for " +
+    private final String banking = "<col=0000ff>Banking</col><br>This is your bank. You can store things here for " +
             "safekeeping. To deposit something from your inventory, just click on it. You can withdraw things in " +
             "the same way. To continue, close the bank and click on the indicated poll booth.";
 
     private final String walkToAccountMan = "<col=0000ff>Moving on</col><br>Polls are run periodically to let the " +
             "Old School RuneScape community vote on how the game should - or shouldn't - change. When you're ready, " +
             "move on through the door indicated.";
+
+    private final String talkToAccountMan = "<col=0000ff>Account Management</col><br>The guide here will tell you " +
+            "all about your account. Just click on him to hear what he's got to say.";
+
+    private final String openAccountTab = "<col=0000ff>Account Management</col><br>Click on the flashing icon " +
+            "to open your Account Management menu.";
+
+    private final String explainAccount = "<col=0000ff>Account Management</col><br>This is your Account Management " +
+            "menu where you can control various aspects of your account. Talk to the Account Guide to learn more.";
+
+    private final String leaving = "<col=0000ff>Moving on</col><br>Continue through the next door.";
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void movingOn(){
@@ -75,26 +86,66 @@ public class Banker extends Node {
     }
 
     private void walkToAccountMan(){
-
+        Utils.walkToAccountGuide(abc);
     }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific helper functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private void talkToAccountMan(){
+        Utils.walkToAccountGuide(abc);
+        Utils.talkTo("Account Guide");
+    }
 
+    private void openAccountTab(){
+        GameTab.open(GameTab.TABS.ACCOUNT);
+    }
 
+    private void explainAccount(){
+        Utils.walkToAccountGuide(abc);
+        Utils.talkTo("Account Guide");
+    }
+
+    private void leaving(){
+        Utils.walkToPriest(abc);
+    }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void execute(){
-//        if(Interfaces.get(263,1,0).getText().equals(intro))
-//            intro();
+        if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
+            System.out.println("Opening da bank");
+            movingOn();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(banking)) {
+            System.out.println("Closing bank and doing poll stuff");
+            banking();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(walkToAccountMan)) {
+            System.out.println("Walking to the account guide");
+            walkToAccountMan();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(talkToAccountMan)) {
+            System.out.println("Talking to the account guide");
+            talkToAccountMan();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(openAccountTab)) {
+            System.out.println("Opening account tab");
+            openAccountTab();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(explainAccount)) {
+            System.out.println("Listening to this dumb fuck tell me about mtxscape");
+            explainAccount();
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(leaving)) {
+            System.out.println("Going to the rapist priest");
+            leaving();
+        }
 
         General.sleep(800, 1200);
     }
 
     @Override
-    public boolean validate(){
-        if(Game.getSetting(406) == 10 || Game.getSetting(406) == 11)//the setting for tutorial island progress
+    public boolean validate(){//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        if(Game.getSetting(406) > 11 || Game.getSetting(406) < 16)//the setting for tutorial island progress
             return true;
         else
             return false;

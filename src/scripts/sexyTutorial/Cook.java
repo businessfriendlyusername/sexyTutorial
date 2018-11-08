@@ -99,24 +99,30 @@ public class Cook extends Node {
         }, General.random(4000,5000));
     }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific helper functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     @Override
     public void execute(){
-        if(Interfaces.get(263,1,0).getText().equals(movingOn))
+        if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
+            System.out.println("Walking to the cook");
             movingOn();
-        else if(Interfaces.get(263,1,0).getText().equals(cooking))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(cooking)) {
+            System.out.println("Talking to the cook");
             cooking();
-        else if(Interfaces.get(263,1,0).getText().equals(makingDough))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(makingDough)) {
+            System.out.println("Mixing some dough");
             makingDough();
-        else if(Interfaces.get(263,1,0).getText().equals(cookingDough))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(cookingDough)) {
+            System.out.println("Cooking the bread");
             cookingDough();
-        else if(Interfaces.get(263,1,0).getText().equals(movingOn2))
+        }
+        else if(Interfaces.get(263,1,0).getText().equals(movingOn2)) {
+            System.out.println("Moving on the to quest guide");
             movingOn2();
+        }
         General.sleep(800, 1200);
     }
 

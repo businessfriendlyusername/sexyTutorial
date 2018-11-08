@@ -76,6 +76,20 @@ public class Utils {
         return PathFinding.canReach(new RSTile(3125, 3124), false);
     }
 
+    public static boolean isBehindBank(){
+        return PathFinding.canReach(new RSTile(3130, 3124), false);
+    }
+
+    public static boolean isInChurch(){
+        int x = Player.getPosition().getX();
+        int y = Player.getPosition().getY();
+        return (x < 3129 && x > 3119 && y < 3111 && y > 3102);
+    }
+
+    public static boolean isNearWizard(){
+        return Player.getPosition().distanceTo(new RSTile(3141, 3088)) < 7;
+    }
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Navigation~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public static void walkToSurvivalExpert(ABCUtil abc){
@@ -259,7 +273,10 @@ public class Utils {
         RSObject[] Qdoor = Objects.findNearest(10, "Door");
         if(Qdoor.length < 1)
             return;
-        DynamicClicking.clickRSObject(Qdoor[0], "Open");
+        if(!DynamicClicking.clickRSObject(Qdoor[0], "Open")){
+            Camera.turnToTile(Qdoor[0]);
+            DynamicClicking.clickRSObject(Qdoor[0], "Open");
+        }
         Timing.waitCondition(new BooleanSupplier() {
             @Override
             public boolean getAsBoolean() {
@@ -357,8 +374,99 @@ public class Utils {
         }, General.random(10000, 15000));
     }
 
-    public static void walkToAccountGuide
+    public static void walkToAccountGuide(ABCUtil abc){
+        if(inAccountRoom())
+            return;
+        walkToBank(abc);
+        RSObject[] door = Objects.findNearest(10, 9721);
+        if(door.length < 1)
+            return;
+        Camera.turnToTile(door[0]);
+        door[0].click("Open");
+        Timing.waitCondition(new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                General.sleep(100);
+                return inAccountRoom();
+            }
+        }, General.random(7000, 10000));
+    }
 
+    public static void walkToPriest(ABCUtil abc){
+        if(isInChurch())
+            return;
+        if(!isBehindBank()){
+            walkToAccountGuide(abc);
+            RSObject[] door = Objects.findNearest(5, 9722);
+            if(door.length < 1)
+                return;
+            Camera.turnToTile(door[0]);
+            door[0].click("Open");
+            Timing.waitCondition(new BooleanSupplier() {
+                @Override
+                public boolean getAsBoolean() {
+                    General.sleep(100);
+                    return Player.getPosition().distanceTo(new RSTile(3130, 3124)) == 0;
+                }
+            }, General.random(5000, 6000));
+        }
+
+        if(!Walking.walkTo(new RSTile(3126, 3107))){
+            Walking.walkTo(new RSTile(3135, 3118));
+            Timing.waitCondition(new BooleanSupplier() {
+                @Override
+                public boolean getAsBoolean() {
+                    return Player.getPosition().distanceTo(new RSTile(3135, 3118)) <= 1;
+                }
+            }, General.random(8000, 12000));
+            Walking.walkTo(new RSTile(3126, 3107));
+            Timing.waitCondition(new BooleanSupplier() {
+                @Override
+                public boolean getAsBoolean() {
+                    return isInChurch();
+                }
+            }, General.random(8000, 12000));
+        }
+    }
+
+    public static void walkToWizard(ABCUtil abc){
+        if(isNearWizard())
+            return;
+        if(!behindChurch()){
+            walkToPriest(abc);
+            RSObject[] door = Objects.findNearest(10, "Door");
+            if(door.length < 1)
+                return;
+            Camera.turnToTile(door[0]);
+            door[0].click("Open");
+            Timing.waitCondition(new BooleanSupplier() {
+                @Override
+                public boolean getAsBoolean() {
+                    General.sleep(100);
+                    return behindChurch();
+                }
+            }, General.random(8000, 10000));
+        }
+
+        Walking.walkTo(new RSTile(3126, 3087));
+        Timing.waitCondition(new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                General.sleep(100);
+                return Player.getPosition().distanceTo(new RSTile(3126, 3087)) <= 1;
+            }
+        }, General.random(10000, 12000));
+
+        Walking.walkTo(new RSTile(3139, 3087));
+        Timing.waitCondition(new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                General.sleep(100);
+                return Player.getPosition().distanceTo(new RSTile(3139, 3087)) <= 1;
+            }
+        }, General.random(10000, 12000));
+
+    }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Other~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public static void flush(){

@@ -1,6 +1,5 @@
 package scripts.sexyTutorial;
 
-import org.jetbrains.annotations.NotNull;
 import org.tribot.api.Clicking;
 import org.tribot.api.DynamicClicking;
 import org.tribot.api.General;
@@ -56,7 +55,7 @@ public class sexyTutorialDeprecated extends Script{
         }
     }//this function gets rid of annoying game notifications that take up the chat box on Tut Isle
 
-    private void talkTo(@NotNull RSNPC npc){//I honestly have no idea what @NotNull does, it was recommended by my IDE LOL
+    private void talkTo(RSNPC npc){//I honestly have no idea what @NotNull does, it was recommended by my IDE LOL
         flush();
         Camera.turnToTile(npc.getPosition());
         if(npc.isOnScreen())
@@ -938,15 +937,35 @@ public class sexyTutorialDeprecated extends Script{
             return;
         Magic.selectSpell("Wind Strike");
         chicken[0].click("Cast Wind Strike -> Chicken");
-        talkTo(wiz[0]);
+
     }
 
     private void goToMainland(){
-
+        RSNPC[] wiz = NPCs.findNearest("Magic Instructor");
+        if(wiz.length < 1)
+            return;
+        talkTo(wiz[0]);
+        if(NPCChat.getOptions() == null)
+            return;
+        NPCChat.selectOption("Yes.", true);
+        General.sleep(1000, 2000);
+        NPCChat.getClickContinueInterface().click("Continue");
+        General.sleep(500, 2000);
+        NPCChat.selectOption("No. I'm not planning to do that.", true);
+        General.sleep(1000, 2000);
+        NPCChat.getClickContinueInterface().click("Continue");
+        General.sleep(1000, 2000);
+        NPCChat.getClickContinueInterface().click("Continue");
+        General.sleep(1000, 2000);
+        NPCChat.getClickContinueInterface().click("Continue");
+        General.sleep(1000, 2000);
+        NPCChat.getClickContinueInterface().click("Continue");
+        General.sleep(2000, 5000);
     }
 
     @Override
     public void run(){
-        openBank();
+        System.out.println(NPCChat.getOptions()[2]);
+
     }
 }
