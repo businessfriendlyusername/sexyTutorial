@@ -43,13 +43,12 @@ public class GielinorGuide extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public void createChar(){
-        int male = 136;//male/female button IDS
-        int female = 137;
+        int male = 138;//male/female button IDS
+        int female = 139;
 
         if (General.random(0,1) == 1)
-            Interfaces.get(269,male).click("Male");
-        else
             Interfaces.get(269,female).click("Female");
+
         General.sleep(100, 200);
         final int[] leftArrows = {106,107,108,109,110,111,112,105,123,122,124,125};
         final int[] rightArrows = {113,114,115,116,117,118,119,121,127,129,130,131};
@@ -80,6 +79,12 @@ public class GielinorGuide extends Node {
             randomCharFeature(leftArrows[rand], rightArrows[rand], options[rand]);
         }
         Interfaces.get(269,100).click("Accept");
+        Timing.waitCondition(new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                return Interfaces.get(269) == null;
+            }
+        }, General.random(4000, 6000));
     }
 
     public void guideIntro(){
@@ -131,27 +136,33 @@ public class GielinorGuide extends Node {
 
     @Override
     public void execute(){
-        //the interface for tutorial island chatbox instructions
+        System.out.println("Gielinor Gay");
         if(Interfaces.get(263,1,0).getText().equals(createChar)) {
             System.out.println("Randomly creating our character");
             createChar();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(guideIntro)) {
             System.out.println("Introduction to the gielinor guide");
             guideIntro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(openOptions)) {
             System.out.println("Opening options tab");
             openOptions();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(guideOutro)) {
             System.out.println("Talking to the guide");
             guideOutro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(leave)) {
             System.out.println("Walking to the survival expert");
             leave();
+            System.out.println("Finished");
         }
+        General.sleep(700, 1500);
     }
 
     @Override

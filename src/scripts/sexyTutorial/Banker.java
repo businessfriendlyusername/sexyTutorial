@@ -81,9 +81,9 @@ public class Banker extends Node {
             NPCChat.getClickContinueInterface().click("Continue");
             General.sleep(330, 1500);
         }
-        General.sleep(1000);
+        General.sleep(500, 1000);
         //TODO null pointer exception thrown below
-        Interfaces.get(310,2,11).click("Close");//Interfaces.closeall() doesn't work here for some reason
+        Interfaces.get(345,2,11).click("Close");//Interfaces.closeall() doesn't work here for some reason
     }
 
     private void walkToAccountMan(){
@@ -112,33 +112,41 @@ public class Banker extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Banker");
         if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
             System.out.println("Opening da bank");
             movingOn();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(banking)) {
             System.out.println("Closing bank and doing poll stuff");
             banking();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(walkToAccountMan)) {
             System.out.println("Walking to the account guide");
             walkToAccountMan();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(talkToAccountMan)) {
             System.out.println("Talking to the account guide");
             talkToAccountMan();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(openAccountTab)) {
             System.out.println("Opening account tab");
             openAccountTab();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(explainAccount)) {
             System.out.println("Listening to this dumb fuck tell me about mtxscape");
             explainAccount();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(leaving)) {
             System.out.println("Going to the rapist priest");
             leaving();
+            System.out.println("Finished");
         }
 
         General.sleep(800, 1200);
@@ -146,7 +154,7 @@ public class Banker extends Node {
 
     @Override
     public boolean validate(){//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        if(Game.getSetting(406) > 11 || Game.getSetting(406) < 16)//the setting for tutorial island progress
+        if(Game.getSetting(406) == 14 || Game.getSetting(406) == 15)//the setting for tutorial island progress
             return true;
         else
             return false;

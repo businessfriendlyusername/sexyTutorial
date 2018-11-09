@@ -965,7 +965,10 @@ public class sexyTutorialDeprecated extends Script{
 
     @Override
     public void run(){
-        System.out.println(NPCChat.getOptions()[2]);
+        while(true) {
+            General.sleep(1000);
+            System.out.println(Game.getSetting(406));
+        }
 
     }
 }

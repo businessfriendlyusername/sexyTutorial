@@ -90,6 +90,9 @@ public class Utils {
         return Player.getPosition().distanceTo(new RSTile(3141, 3088)) < 7;
     }
 
+    public static boolean isNearMiningInstructor(){
+        return Player.getPosition().distanceTo(new RSTile(3080, 9505)) < 8;
+    }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Navigation~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public static void walkToSurvivalExpert(ABCUtil abc){
@@ -288,20 +291,23 @@ public class Utils {
     }
 
     public static void walkToMiningInstructor(ABCUtil abc){
+        if(isNearMiningInstructor())
+            return;
         if(!inMiningArea()) {
             walkToQuestGuide(abc);
             RSObject[] ladder = Objects.findNearest(10, "Ladder");
             if(ladder.length < 1)
                 return;
-            ladder[0].click("Climb-down");
+            while(!ladder[0].click("Climb-down"))
+                Camera.turnToTile(ladder[0]);
             Timing.waitCondition(new BooleanSupplier() {
                 @Override
                 public boolean getAsBoolean() {
                     return Utils.inMiningArea();
                 }
             }, General.random(8000, 10000));
-            WebWalking.walkTo(new RSTile(3080, 9505));
         }
+        WebWalking.walkTo(new RSTile(3080, 9505));
     }
 
     public static void walkToCombatInstructor(ABCUtil abc){

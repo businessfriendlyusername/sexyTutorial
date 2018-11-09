@@ -69,7 +69,7 @@ public class shrimp_fisher extends Script{
                 return false;
         }
         else{//we have our tool in our inventory
-            if (Banking.depositAll() < 1)//we failed to deposit
+            if (Banking.depositAllExcept(tool) < 1)//we failed to deposit
                 return false;
         }
         return Timing.waitCondition(new Condition() { // Since we can only enter the bank method if our inventory is full,

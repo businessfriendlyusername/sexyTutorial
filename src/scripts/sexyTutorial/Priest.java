@@ -66,29 +66,36 @@ public class Priest extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Priest");
         if(Interfaces.get(263,1,0).getText().equals(intro)) {
             System.out.println("Introducing Brother Brace!");
             intro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(prayerMenu)) {
             System.out.println("Opening prayer menu");
             prayerMenu();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(prayerExplain)) {
             System.out.println("gettin the rundown on prayers!");
             prayerExplain();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(friends)) {
             System.out.println("Opening friends list");
             friends();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(friendsExplain)) {
             System.out.println("leaning wtf a friend is");
             friendsExplain();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(leave)) {
             System.out.println("Getting the fuck away from this child molester priest");
             leave();
+            System.out.println("Finished");
         }
 
         General.sleep(800, 1200);

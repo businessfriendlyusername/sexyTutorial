@@ -73,7 +73,8 @@ public class Cook extends Node {
         RSObject[] range = Objects.findNearest(10, "Range");
         if (range.length < 1)
             return;
-        range[0].click("Cook");
+        while(!range[0].click("Cook"))
+            Camera.turnToTile(range[0]);
         Timing.waitCondition(new BooleanSupplier() {
             @Override
             public boolean getAsBoolean() {
@@ -89,7 +90,8 @@ public class Cook extends Node {
             return;
         Camera.turnToTile(door[0]);
         General.sleep(400, 600);
-        door[0].click("Open");
+        while(!door[0].click("Open"))
+            Camera.turnToTile(door[0]);
         Timing.waitCondition(new BooleanSupplier() {
             @Override
             public boolean getAsBoolean() {
@@ -103,25 +105,31 @@ public class Cook extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Cook");
         if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
             System.out.println("Walking to the cook");
             movingOn();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(cooking)) {
             System.out.println("Talking to the cook");
             cooking();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(makingDough)) {
             System.out.println("Mixing some dough");
             makingDough();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(cookingDough)) {
             System.out.println("Cooking the bread");
             cookingDough();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(movingOn2)) {
             System.out.println("Moving on the to quest guide");
             movingOn2();
+            System.out.println("Finished");
         }
         General.sleep(800, 1200);
     }

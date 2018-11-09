@@ -40,8 +40,11 @@ public class QuestGuide extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void running(){
-
-    }//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~FINISH~~~~~~~~~~~~~~~~~~~~~~~~~
+        Options.setRunEnabled(false);
+        General.sleep(50, 100);
+        Options.setRunEnabled(true);
+        General.sleep(100, 150);
+    }//this is hacked af
 
     private void movingOn(){
         Utils.walkToQuestGuide(abc);
@@ -67,7 +70,8 @@ public class QuestGuide extends Node {
         RSObject[] ladder = Objects.findNearest(10, "Ladder");
         if(ladder.length < 1)
             return;
-        ladder[0].click("Climb-down");
+        if(!ladder[0].click("Climb-down"))
+            Camera.turnToTile(ladder[0]);
         Timing.waitCondition(new BooleanSupplier() {
             @Override
             public boolean getAsBoolean() {
@@ -84,29 +88,36 @@ public class QuestGuide extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Quest Guide");
         if(Interfaces.get(263,1,0).getText().equals(running)) {
             System.out.println("Toggling run");
             running();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
             System.out.println("walking to the quest guide");
             movingOn();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(quests)) {
             System.out.println("Talking to the quest guide");
             quests();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(questJournal)) {
             System.out.println("Opening the quest journal");
             questJournal();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(questJournal2)) {
             System.out.println("Talking to the quest guide again");
             questJournal2();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(movingOn2)) {
             System.out.println("Going to the mine");
             movingOn2();
+            System.out.println("Finished");
         }
         General.sleep(800, 1200);
     }

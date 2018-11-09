@@ -112,7 +112,7 @@ public class SurvivalInstructor extends Node {
     private void woodcutting(){
         if(!Utils.isNearSurvivalExpert())
             Utils.walkToSurvivalExpert(abc);
-        if(!(Inventory.getCount("Bronze axe") == 0)) {//we have no axe in our inventory
+        if(Inventory.getCount("Bronze axe") == 0) {//we have no axe in our inventory
             if (Inventory.getAll().length >= 26)//our inventory is too full, drop some shit
                 BInventory.dropAllExceptOne(dontDrop);
             Utils.talkTo("Survival Expert");
@@ -213,6 +213,7 @@ public class SurvivalInstructor extends Node {
         Timing.waitCondition(new BooleanSupplier() {//sleep until we are near the fire
             @Override
             public boolean getAsBoolean() {
+                General.sleep(100);
                 return Player.getPosition().distanceTo(fires[0]) <= 1;
             }
         }, General.random(8000, 10000));
@@ -256,43 +257,54 @@ public class SurvivalInstructor extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Survival Expert");
         //the interface for tutorial island chatbox instructions
         if(Interfaces.get(263,1,0).getText().equals(movingAround)) {
             System.out.println("Walking to the survival expert");
             movingAround();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(openBackpack)) {
             System.out.println("Opening our backpack");
             openBackpack();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(fishing)) {
             System.out.println("Fishing for some shrimpers");
             fishing();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(openStats)) {
             System.out.println("Opening our stats");
             openStats();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(skillsAndExp)) {
             System.out.println("talking to bitch about skills");
             skillsAndExp();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(woodcutting)) {
             System.out.println("Chopping a tree");
             woodcutting();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(firemaking)) {
             System.out.println("Lighting a fire");
             firemaking();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(cooking)) {
             System.out.println("Cooking our shrimpers");
             cooking();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263, 1, 0).getText().equals(movingOn)) {
             System.out.println("Walking to the cook");
             movingOn();
+            System.out.println("Finished");
         }
+        General.sleep(700, 1500);
     }
 
     @Override

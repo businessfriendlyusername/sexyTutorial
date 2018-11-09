@@ -25,7 +25,7 @@ public class CombatInstructor extends Node {
     private final String intro = "<col=0000ff>Combat</col><br>In this area you will find out about melee and " +
             "ranged combat. Speak to the guide and he will tell you all about it.";
 
-    private final String equipedItems = "</step>@<col=0000ff>Equipping items</col><br>You now have access to a " +
+    private final String equipedItems = "<col=0000ff>Equipping items</col><br>You now have access to a " +
             "new interface. Click on the flashing icon of a man, the one to the right of your backpack icon.";
 
     private final String wornInventory = "<col=0000ff>Worn inventory</col><br>This is your worn inventory. Here " +
@@ -186,6 +186,13 @@ public class CombatInstructor extends Node {
         if(Inventory.getCount("Shortbow") == 0 && !Equipment.isEquipped("Shortbow"))
             Utils.talkTo("Combat Instructor");
         General.sleep(400, 600);
+        RSItem[] bow = Inventory.find("Shortbow");
+        RSItem[] arrows = Inventory.find("Bronze arrow");
+        if(bow.length < 1 && !Equipment.isEquipped("Shortbow")|| arrows.length < 1 && !Equipment.isEquipped("Bronze arrow"))
+            return;
+        bow[0].click("Wield");
+        arrows[0].click("Wield");
+        General.sleep(200, 500);
         RSNPC[] rat = NPCs.findNearest("Giant rat");
         if(rat.length < 1)
             return;
@@ -225,6 +232,7 @@ public class CombatInstructor extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Combat Instructor");
         if(Interfaces.get(263,1,0).getText().equals(intro)) {
             System.out.println("Introducing the combat instructor");
             intro();
@@ -233,34 +241,42 @@ public class CombatInstructor extends Node {
         else if(Interfaces.get(263,1,0).getText().equals(equipedItems)) {
             System.out.println("Viewing equiped Items");
             equipedItems();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(wornInventory)) {
             System.out.println("Opening worn inventory");
             wornInventory();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(equipDagger)) {
             System.out.println("Equipping my fukin dagger");
             equipDagger();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(equipmentStats)) {
             System.out.println("Closing interface and talking to the instructor");
             equipmentStats();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(unequippingItems)) {
             System.out.println("Equipping sword and shield");
             unequippingItems();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(combatInterface)) {
             System.out.println("Opening combat interface");
             combatInterface();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(combatInterface2)) {
             System.out.println("Walking to rat cage");
             combatInterface2();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(attacking)) {
             System.out.println("attempting to murder a rat");
             attacking();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(returnToInstructor)) {
             System.out.println("going back to the instructor");
@@ -270,10 +286,12 @@ public class CombatInstructor extends Node {
         else if(Interfaces.get(263,1,0).getText().equals(murderRatRanged)) {
             System.out.println("shooting this fukin rat dead");
             murderRatRanged();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
             System.out.println("going to the next instructor");
             movingOn();
+            System.out.println("Finished");
         }
 
         General.sleep(800, 1200);
@@ -281,7 +299,7 @@ public class CombatInstructor extends Node {
 
     @Override
     public boolean validate(){
-        if(Game.getSetting(406) == 10 || Game.getSetting(406) == 11)//the setting for tutorial island progress
+        if(Game.getSetting(406) == 10 || Game.getSetting(406) == 11 || Game.getSetting(406) == 12)//the setting for tutorial island progress
             return true;
         else
             return false;

@@ -68,7 +68,8 @@ public class MiningInstructor extends Node {
             return;
 
         for(RSObject rock : tinRock) {//iterate through the rocks incase they've already been mined
-            rock.click("Mine");
+            while(!rock.click("Mine"))
+                Camera.turnToTile(rock);
             Timing.waitCondition(new BooleanSupplier() {
                 @Override
                 public boolean getAsBoolean() {
@@ -90,7 +91,8 @@ public class MiningInstructor extends Node {
             return;
 
         for(RSObject rock : copperRock){//iterate through the rocks incase they've already been mined
-            rock.click("Mine");
+            while(!rock.click("Mine"))
+                Camera.turnToTile(rock);
             Timing.waitCondition(new BooleanSupplier() {
                 @Override
                 public boolean getAsBoolean() {
@@ -173,33 +175,41 @@ public class MiningInstructor extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Mining Instructor");
         if(Interfaces.get(263,1,0).getText().equals(intro)) {
             System.out.println("Introducing the mining instructor");
             intro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(miningTin)) {
             System.out.println("Mining some tin");
             miningTin();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(miningCopper)) {
             System.out.println("Mining some copper");
             miningCopper();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(smelting)) {
             System.out.println("smelting a bronze bar");
             smelting();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(smelting2)) {
             System.out.println("talking to the instructor again");
             smelting2();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(smithing)) {
             System.out.println("making a bronze dagger");
             smithing();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(movingOn)) {
             System.out.println("going to the combat instructor");
             movingOn();
+            System.out.println("Finished");
         }
         General.sleep(800, 1200);
     }

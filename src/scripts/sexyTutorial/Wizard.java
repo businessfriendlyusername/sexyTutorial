@@ -81,25 +81,31 @@ public class Wizard extends Node {
 
     @Override
     public void execute(){
+        System.out.println("Wizard");
         if(Interfaces.get(263,1,0).getText().equals(intro)) {
             System.out.println("Getting magic intro");
             intro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(openMagic)) {
             System.out.println("Opening magic tab");
             openMagic();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(magic)) {
             System.out.println("Getting the rundown on magic from this yung wiz!");
             magic();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(magicCast)) {
             System.out.println("Casting wind strike!");
             magicCast();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(toMainland)) {
             System.out.println("Travelling to mainland!");
             toMainland();
+            System.out.println("Finished");
         }
 
         General.sleep(800, 1200);
