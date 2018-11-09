@@ -82,6 +82,7 @@ public class Banker extends Node {
             General.sleep(330, 1500);
         }
         General.sleep(1000);
+        //TODO null pointer exception thrown below
         Interfaces.get(310,2,11).click("Close");//Interfaces.closeall() doesn't work here for some reason
     }
 

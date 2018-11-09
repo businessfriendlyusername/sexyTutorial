@@ -101,7 +101,7 @@ public class CombatInstructor extends Node {
         RSItem[] dagger = Inventory.find("Bronze dagger");
         if(dagger.length < 1)
             return;
-        dagger[0].click("Wield");
+        dagger[0].click("Equip");
     }
 
     private void equipmentStats(){
@@ -124,7 +124,7 @@ public class CombatInstructor extends Node {
             return;
         sword[0].click("Wield");
         General.sleep(200, 350);
-        sword[0].click("Wield");
+        shield[0].click("Wield");
     }
 
     private void combatInterface(){
@@ -228,6 +228,7 @@ public class CombatInstructor extends Node {
         if(Interfaces.get(263,1,0).getText().equals(intro)) {
             System.out.println("Introducing the combat instructor");
             intro();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(equipedItems)) {
             System.out.println("Viewing equiped Items");
@@ -264,6 +265,7 @@ public class CombatInstructor extends Node {
         else if(Interfaces.get(263,1,0).getText().equals(returnToInstructor)) {
             System.out.println("going back to the instructor");
             returnToInstructor();
+            System.out.println("Finished");
         }
         else if(Interfaces.get(263,1,0).getText().equals(murderRatRanged)) {
             System.out.println("shooting this fukin rat dead");

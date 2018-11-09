@@ -56,7 +56,7 @@ public class Wizard extends Node {
         chicken[0].click("Cast Wind Strike -> Chicken");
     }
 
-    private void toMainland(){
+    private void toMainland(){//TODO add null checks and timing waits
         Utils.walkToWizard(abc);
         Utils.talkTo("Magic Instructor");
         if(NPCChat.getOptions() == null)
@@ -64,7 +64,7 @@ public class Wizard extends Node {
         NPCChat.selectOption("Yes.", true);
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");
-        General.sleep(500, 2000);
+        General.sleep(1000, 2000);
         NPCChat.selectOption("No. I'm not planning to do that.", true);
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");

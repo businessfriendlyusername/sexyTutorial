@@ -300,16 +300,20 @@ public class Utils {
                     return Utils.inMiningArea();
                 }
             }, General.random(8000, 10000));
+            WebWalking.walkTo(new RSTile(3080, 9505));
         }
-        //we are now in the mining area, WebWalking works here, YAY!
-        WebWalking.walkTo(new RSTile(3080, 9505));
     }
 
     public static void walkToCombatInstructor(ABCUtil abc){
-        if(!inCombatArea()){
+        if(inCombatArea())
+            return;
+        else if(inRatCage())
+            WebWalking.walkTo(new RSTile(3105, 9508));
+        else {
             walkToMiningInstructor(abc);
             WebWalking.walkTo(new RSTile(3105, 9508));
         }
+
     }
 
     public static void walkToRatCage(ABCUtil abc){
