@@ -9,19 +9,14 @@ import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
 import scripts.API.BInventory;
+import scripts.API.Node;
 
 
 import java.util.function.BooleanSupplier;
 
 public class MiningInstructor extends Node {
 
-    MiningInstructor(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String[] dontDrop = {"Bronze pickaxe", "Tin ore", "Copper ore", "Bronze bar", "Hammer", "Bronze dagger"};
 
@@ -53,14 +48,16 @@ public class MiningInstructor extends Node {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private void intro(){
-        Utils.walkToMiningInstructor(abc);
+        Utils.walkToMiningInstructor();
         if(Inventory.getAll().length == 28)//inventory is full, drop some shit
             BInventory.dropAllExceptOne(dontDrop);
         Utils.talkTo("Mining Instructor");
     }
 
     private void miningTin(){
-        Utils.walkToMiningInstructor(abc);
+        if(Inventory.find("Tin ore").length > 0)
+            return;
+        Utils.walkToMiningInstructor();
         if(Inventory.getAll().length == 28)
             BInventory.dropAllExceptOne(dontDrop);
         RSObject[] tinRock = Objects.findNearest(15, 10080);
@@ -83,7 +80,9 @@ public class MiningInstructor extends Node {
     }
 
     private void miningCopper(){
-        Utils.walkToMiningInstructor(abc);
+        if(Inventory.find("Copper ore").length > 0)
+            return;
+        Utils.walkToMiningInstructor();
         if(Inventory.getAll().length == 28)
             BInventory.dropAllExceptOne(dontDrop);
         RSObject[] copperRock = Objects.findNearest(15, 10079);
@@ -106,7 +105,7 @@ public class MiningInstructor extends Node {
     }
 
     private void smelting(){
-        Utils.walkToMiningInstructor(abc);
+        Utils.walkToMiningInstructor();
         if(Inventory.getCount("Copper ore") == 0)
             miningCopper();
         if(Inventory.getCount("Tin ore") == 0)
@@ -128,14 +127,14 @@ public class MiningInstructor extends Node {
     }
 
     private void smelting2(){
-        Utils.walkToMiningInstructor(abc);
+        Utils.walkToMiningInstructor();
         if(Inventory.getAll().length == 28)
             BInventory.dropAllExceptOne(dontDrop);
         Utils.talkTo("Mining Instructor");
     }
 
     private void smithing(){
-        Utils.walkToMiningInstructor(abc);
+        Utils.walkToMiningInstructor();
         if(Inventory.getCount("Bronze bar") == 0)
             smelting();
         if(Inventory.getCount("Hammer") == 0)
@@ -168,7 +167,7 @@ public class MiningInstructor extends Node {
     }
 
     private void movingOn(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

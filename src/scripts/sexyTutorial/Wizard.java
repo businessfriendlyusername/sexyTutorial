@@ -4,16 +4,11 @@ import org.tribot.api.General;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.*;
+import scripts.API.Node;
 
 public class Wizard extends Node {
 
-    Wizard(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String intro = "<col=0000ff>Your final instructor!</col><br>Follow the path to the wizard's house, " +
             "where you will be shown how to cast spells. When you get there, just talk with the magic instructor.";
@@ -34,7 +29,7 @@ public class Wizard extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void intro() {
-        Utils.walkToWizard(abc);
+        Utils.walkToWizard();
         Utils.talkTo("Magic Instructor");
     }
 
@@ -43,12 +38,12 @@ public class Wizard extends Node {
     }
 
     private void magic(){
-        Utils.walkToWizard(abc);
+        Utils.walkToWizard();
         Utils.talkTo("Magic Instructor");
     }
 
     private void magicCast(){
-        Utils.walkToWizard(abc);
+        Utils.walkToWizard();
         RSNPC[] chicken = NPCs.findNearest("Chicken");
         if(chicken.length < 1)
             return;
@@ -57,7 +52,7 @@ public class Wizard extends Node {
     }
 
     private void toMainland(){//TODO add null checks and timing waits
-        Utils.walkToWizard(abc);
+        Utils.walkToWizard();
         Utils.talkTo("Magic Instructor");
         if(NPCChat.getOptions() == null)
             return;
@@ -74,7 +69,7 @@ public class Wizard extends Node {
         NPCChat.getClickContinueInterface().click("Continue");
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");
-        General.sleep(2000, 5000);
+        General.sleep(10000, 15000);
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

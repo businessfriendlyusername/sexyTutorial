@@ -9,6 +9,8 @@ import org.tribot.script.Script;
 import org.tribot.api2007.types.RSNPC;
 import org.tribot.api.General;
 
+import java.util.function.BooleanSupplier;
+
 //fishing spot in lumbridge swamp. pos:(3241, 3149)
 //lumbridge castle south staircase pos:(3207, 3209)
 
@@ -42,7 +44,14 @@ public class shrimp_fisher extends Script{
     }
 
     private boolean walkToBank(){
-        if (!WebWalking.walkToBank()){
+        if (!WebWalking.walkToBank(new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                return Interfaces.get(595, 37) != null;//if we accidentaly open the world map
+            }
+        }, 500)){
+            if(Interfaces.get(595, 37) != null)
+                Interfaces.get(595, 37).click("Close");
             return false;
         }
 
@@ -84,7 +93,15 @@ public class shrimp_fisher extends Script{
 
     private boolean walkToFish(){
         final RSTile fishing_spot = new RSTile(3241,3149,0);
-        if(!WebWalking.walkTo(fishing_spot)){
+        if(!WebWalking.walkTo(fishing_spot, new BooleanSupplier() {
+            @Override
+            public boolean getAsBoolean() {
+                return Interfaces.get(595, 37) != null;//webwalking opened the world map
+            }
+        }, 500))
+        {
+            if(Interfaces.get(595, 37) != null)
+                Interfaces.get(595, 37).click("Close");
             return false;
         }
         return Timing.waitCondition(new Condition() { // If we reach the trees before the timeout, this method will return

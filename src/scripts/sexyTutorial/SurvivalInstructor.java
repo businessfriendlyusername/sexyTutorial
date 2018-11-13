@@ -10,19 +10,16 @@ import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSNPC;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
+import scripts.API.AntiBan;
 import scripts.API.BInventory;
 import scripts.API.Firemaking;
+import scripts.API.Node;
 
 import java.util.function.BooleanSupplier;
 
 public class SurvivalInstructor extends Node {
 
-    SurvivalInstructor(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String[] dontDrop = {"Small fishing net", "Bronze axe", "Tinderbox", "Raw shrimps", "Logs"};
 
@@ -64,7 +61,7 @@ public class SurvivalInstructor extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void movingAround(){
-        Utils.walkToSurvivalExpert(abc);
+        Utils.walkToSurvivalExpert();
         Utils.talkTo("Survival Expert");
     }
 
@@ -94,7 +91,7 @@ public class SurvivalInstructor extends Node {
             }, General.random(6000, 7000));
         }
         else//we aren't close to the survival expert, walk to her
-            Utils.walkToSurvivalExpert(abc);//The node framework will call fishing() again, so we don't need to do anything else
+            Utils.walkToSurvivalExpert();//The node framework will call fishing() again, so we don't need to do anything else
     }
 
     private void openStats(){
@@ -105,13 +102,13 @@ public class SurvivalInstructor extends Node {
         if(Inventory.getAll().length > 26)//we don't have enough inventory space for the axe and tinderbox
             BInventory.dropAllExceptOne(dontDrop);
         if(!Utils.isNearSurvivalExpert())//we aren't close to the instructor
-            Utils.walkToSurvivalExpert(abc);
+            Utils.walkToSurvivalExpert();
         Utils.talkTo("Survival Expert");
     }
 
     private void woodcutting(){
         if(!Utils.isNearSurvivalExpert())
-            Utils.walkToSurvivalExpert(abc);
+            Utils.walkToSurvivalExpert();
         if(Inventory.getCount("Bronze axe") == 0) {//we have no axe in our inventory
             if (Inventory.getAll().length >= 26)//our inventory is too full, drop some shit
                 BInventory.dropAllExceptOne(dontDrop);
@@ -150,7 +147,7 @@ public class SurvivalInstructor extends Node {
                 General.sleep(800, 1200);
             }
             if(!Utils.isNearSurvivalExpert())
-                Utils.walkToSurvivalExpert(abc);
+                Utils.walkToSurvivalExpert();
             Utils.talkTo("Survival Expert");
         }
 
@@ -164,7 +161,7 @@ public class SurvivalInstructor extends Node {
             return;
 
         if (Firemaking.standingOnFire()) {//if we're already standing on a fire use my AMAZING algorethumb to find an open tile
-            Utils.walkToSurvivalExpert(abc);
+            Utils.walkToSurvivalExpert();
             int X = Player.getPosition().getX();
             int Y = Player.getPosition().getY();
             for(int i = 0; i < 10 && Firemaking.standingOnFire(); i++) {//loop 10 times and while we're on a fire
@@ -188,7 +185,7 @@ public class SurvivalInstructor extends Node {
 
     private void cooking(){
         if(!Utils.isNearSurvivalExpert())
-            Utils.walkToSurvivalExpert(abc);
+            Utils.walkToSurvivalExpert();
         if(Inventory.getCount("Raw shrimps") == 0){//we need shrimps to cook fam
             fishing();
             General.sleep(800, 1200);
@@ -206,7 +203,7 @@ public class SurvivalInstructor extends Node {
         RSItem[] shrimp = Inventory.find("Raw shrimps");
         if(shrimp.length < 1)
             return;
-        if(abc.shouldHover()){
+        if(AntiBan.getABCUtil().shouldHover()){
             shrimp[0].click("Use");
             Clicking.hover(fires[0]);
         }
@@ -226,7 +223,7 @@ public class SurvivalInstructor extends Node {
         RSTile nearGate = new RSTile(3091, 3092);//the tile next to the exit gate
         //we're not close to the survival expert or next to the gate
         if(!Utils.isNearSurvivalExpert() && !(Player.getPosition().distanceTo(nearGate) <= 1))
-            Utils.walkToSurvivalExpert(abc);
+            Utils.walkToSurvivalExpert();
 
         if(!(Player.getPosition().distanceTo(nearGate) <= 1)){//only walk to the gate if we're not there already
             Walking.walkTo(nearGate);//infront of gate in survival area

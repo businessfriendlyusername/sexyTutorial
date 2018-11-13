@@ -967,7 +967,7 @@ public class sexyTutorialDeprecated extends Script{
     public void run(){
         while(true) {
             General.sleep(1000);
-            System.out.println(Game.getSetting(406));
+            Interfaces.closeAll();
         }
 
     }

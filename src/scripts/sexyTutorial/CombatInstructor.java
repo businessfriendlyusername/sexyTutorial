@@ -6,19 +6,15 @@ import org.tribot.api.Timing;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.*;
+import scripts.API.AntiBan;
 import scripts.API.BInventory;
+import scripts.API.Node;
 
 import java.util.function.BooleanSupplier;
 
 public class CombatInstructor extends Node {
 
-    CombatInstructor(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String[] dontDrop = {"Bronze dagger", "Bronze arrow", "Wooden shield", "Bronze sword", "Shortbow"};
 
@@ -70,7 +66,7 @@ public class CombatInstructor extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void intro(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         Utils.talkTo("Combat Instructor");
     }
 
@@ -88,7 +84,7 @@ public class CombatInstructor extends Node {
     }
 
     private void equipDagger(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         if(Inventory.getCount("Bronze dagger") == 0)
         {
             if(Inventory.getAll().length >= 20)
@@ -106,14 +102,14 @@ public class CombatInstructor extends Node {
 
     private void equipmentStats(){
         Interfaces.closeAll();
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         if(Inventory.getAll().length > 20)
             BInventory.dropAllExceptOne(dontDrop);
         Utils.talkTo("Combat Instructor");
     }
 
     private void unequippingItems(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         if(Inventory.getAll().length > 20)
             BInventory.dropAllExceptOne(dontDrop);
         if(Inventory.getCount("Bronze sword") == 0 || Inventory.getCount("Wooden shield") == 0)
@@ -132,11 +128,11 @@ public class CombatInstructor extends Node {
     }
 
     private void combatInterface2(){
-        Utils.walkToRatCage(abc);
+        Utils.walkToRatCage();
     }
 
     private void attacking(){
-        Utils.walkToRatCage(abc);
+        Utils.walkToRatCage();
         RSNPC[] rat = NPCs.findNearest("Giant rat");
         if(rat.length < 1)
             return;
@@ -163,22 +159,20 @@ public class CombatInstructor extends Node {
         if(ratToMurder == null)
             return;
         long startTime = Timing.currentTimeMillis();
-        if(abc.shouldCheckXP())
-            abc.checkXP();
         while(ratToMurder.getAnimation() != 4935 && Timing.timeFromMark(startTime) < 20000){//wait for rat death animation or timeout after 20 seconds
             General.sleep(300);
         }
     }
 
     private void returnToInstructor(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         if(Inventory.getAll().length > 20)
             BInventory.dropAllExceptOne(dontDrop);
         Utils.talkTo("Combat Instructor");
     }
 
     private void murderRatRanged(){
-        Utils.walkToCombatInstructor(abc);
+        Utils.walkToCombatInstructor();
         if(Inventory.getAll().length > 20)
             BInventory.dropAllExceptOne(dontDrop);
         if(Inventory.getCount("Bronze arrow") == 0 && !Equipment.isEquipped("Bronze arrow"))//we don't have arrows and we haven't equipped arrows
@@ -225,7 +219,7 @@ public class CombatInstructor extends Node {
     }
 
     private void movingOn(){
-        Utils.walkToOutsideBank(abc);
+        Utils.walkToOutsideBank();
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

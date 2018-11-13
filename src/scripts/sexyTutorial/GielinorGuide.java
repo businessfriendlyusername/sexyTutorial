@@ -9,17 +9,13 @@ import org.tribot.api2007.*;
 import org.tribot.api2007.types.*;
 import scripts.API.BInventory;
 import scripts.API.Firemaking;
+import scripts.API.Node;
 
 import java.util.function.BooleanSupplier;
 
 public class GielinorGuide extends Node {
 
-    GielinorGuide(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String createChar = "<col=0000ff>Setting your appearance</col><br>Before you get started, you'll " +
             "need to set the appearance of your character. Please use the open interface to set your appearance.";
@@ -45,6 +41,8 @@ public class GielinorGuide extends Node {
     public void createChar(){
         int male = 138;//male/female button IDS
         int female = 139;
+        if(Interfaces.get(269) == null)
+            return;
 
         if (General.random(0,1) == 1)
             Interfaces.get(269,female).click("Female");
@@ -103,7 +101,7 @@ public class GielinorGuide extends Node {
     }
 
     public void leave(){
-        Utils.walkToSurvivalExpert(abc);
+        Utils.walkToSurvivalExpert();
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific helper functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

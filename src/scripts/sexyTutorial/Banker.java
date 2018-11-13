@@ -6,19 +6,13 @@ import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api.util.abc.preferences.OpenBankPreference;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.*;
+import scripts.API.AntiBan;
+import scripts.API.Node;
 
 
 import java.util.function.BooleanSupplier;
 
 public class Banker extends Node {
-
-    Banker(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String movingOn = "<col=0000ff>Banking</col><br>Follow the path and you will come to the front of " +
             "the building. This is the Bank of Gielinor, where you can store all your most valued items. To open " +
@@ -45,8 +39,8 @@ public class Banker extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void movingOn(){
-        Utils.walkToBank(abc);
-        if(abc.generateOpenBankPreference() == OpenBankPreference.BANKER){//open bank with the banker
+        Utils.walkToBank();
+        if(AntiBan.getABCUtil().generateOpenBankPreference() == OpenBankPreference.BANKER){//open bank with the banker
             RSNPC[] banker = NPCs.findNearest("Banker");
             if(banker.length < 1)
                 return;
@@ -87,11 +81,11 @@ public class Banker extends Node {
     }
 
     private void walkToAccountMan(){
-        Utils.walkToAccountGuide(abc);
+        Utils.walkToAccountGuide();
     }
 
     private void talkToAccountMan(){
-        Utils.walkToAccountGuide(abc);
+        Utils.walkToAccountGuide();
         Utils.talkTo("Account Guide");
     }
 
@@ -100,12 +94,12 @@ public class Banker extends Node {
     }
 
     private void explainAccount(){
-        Utils.walkToAccountGuide(abc);
+        Utils.walkToAccountGuide();
         Utils.talkTo("Account Guide");
     }
 
     private void leaving(){
-        Utils.walkToPriest(abc);
+        Utils.walkToPriest();
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -153,7 +147,7 @@ public class Banker extends Node {
     }
 
     @Override
-    public boolean validate(){//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public boolean validate(){//TODO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         if(Game.getSetting(406) == 14 || Game.getSetting(406) == 15)//the setting for tutorial island progress
             return true;
         else

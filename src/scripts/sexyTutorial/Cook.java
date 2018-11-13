@@ -8,19 +8,14 @@ import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSObject;
 import scripts.API.BInventory;
-
+import scripts.API.Node;
 
 import java.util.function.BooleanSupplier;
 
 public class Cook extends Node {
 
-    Cook(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
 
     private final String[] dontDrop = {"Pot of flour", "Bucket of water", "Bread dough"};
 
@@ -45,18 +40,18 @@ public class Cook extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void movingOn(){
-        Utils.walkToCook(abc);
+        Utils.walkToCook();
     }
 
     private void cooking(){
-        Utils.walkToCook(abc);
+        Utils.walkToCook();
         if(Inventory.getAll().length >= 26)
             BInventory.dropAllExceptOne(dontDrop);
         Utils.talkTo("Master Chef");
     }
 
     private void makingDough(){
-        Utils.walkToCook(abc);
+        Utils.walkToCook();
         if(Inventory.getAll().length >= 27)
             BInventory.dropAllExceptOne(dontDrop);
         RSItem[] flour = Inventory.find("Pot of flour");
@@ -69,7 +64,7 @@ public class Cook extends Node {
     }
 
     private void cookingDough(){
-        Utils.walkToCook(abc);
+        Utils.walkToCook();
         RSObject[] range = Objects.findNearest(10, "Range");
         if (range.length < 1)
             return;
@@ -84,7 +79,7 @@ public class Cook extends Node {
     }
 
     private void movingOn2(){
-        Utils.walkToCook(abc);
+        Utils.walkToCook();
         RSObject[] door = Objects.findNearest(10, 9710);
         if(door.length < 1)
             return;

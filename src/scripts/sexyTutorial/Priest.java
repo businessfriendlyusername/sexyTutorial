@@ -3,17 +3,11 @@ package scripts.sexyTutorial;
 import org.tribot.api.General;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.*;
+import scripts.API.Node;
 
 public class Priest extends Node {
 
-    Priest(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
-
     private final String intro = "<col=0000ff>Prayer</col><br>Follow the path to the chapel and enter it." +
             "<br>Once inside talk to the monk. He'll tell you all about the Prayer skill.";
 
@@ -36,7 +30,7 @@ public class Priest extends Node {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tutorial Step Methods~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     private void intro(){
-        Utils.walkToPriest(abc);
+        Utils.walkToPriest();
         Utils.talkTo("Brother Brace");
     }
 
@@ -45,7 +39,7 @@ public class Priest extends Node {
     }
 
     private void prayerExplain(){
-        Utils.walkToPriest(abc);
+        Utils.walkToPriest();
         Utils.talkTo("Brother Brace");
     }
 
@@ -54,12 +48,12 @@ public class Priest extends Node {
     }
 
     private void friendsExplain(){
-        Utils.walkToPriest(abc);
+        Utils.walkToPriest();
         Utils.talkTo("Brother Brace");
     }
 
     private void leave(){
-        Utils.walkToWizard(abc);
+        Utils.walkToWizard();
     }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node framework~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

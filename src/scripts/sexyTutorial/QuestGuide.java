@@ -5,18 +5,14 @@ import org.tribot.api.Timing;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSObject;
+import scripts.API.Node;
 
 import java.util.function.BooleanSupplier;
 
 public class QuestGuide extends Node {
 
-    QuestGuide(ABCUtil a){
-        abc = a;
-    }//make all nodes share the same ABCUtil (My Java is a bit shaky, please correct me
-    // if this isn't right, or if there's a better way to do this!!!)
-
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Node specific variables~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ABCUtil abc;
+
 
     private final String running = "<col=0000ff>Fancy a run?</col><br>When navigating the world, you can either run " +
             "or walk. Running is faster but you can't run for long as you'll soon run out of energy. You can use the " +
@@ -47,26 +43,26 @@ public class QuestGuide extends Node {
     }//this is hacked af
 
     private void movingOn(){
-        Utils.walkToQuestGuide(abc);
+        Utils.walkToQuestGuide();
     }
 
     private void quests(){
-        Utils.walkToQuestGuide(abc);
+        Utils.walkToQuestGuide();
         Utils.talkTo("Quest Guide");
     }
 
     private void questJournal(){
-        Utils.walkToQuestGuide(abc);
+        Utils.walkToQuestGuide();
         GameTab.open(GameTab.TABS.QUESTS);
     }
 
     private void questJournal2(){
-        Utils.walkToQuestGuide(abc);
+        Utils.walkToQuestGuide();
         Utils.talkTo("Quest Guide");
     }
 
     private void movingOn2(){
-        Utils.walkToQuestGuide(abc);
+        Utils.walkToQuestGuide();
         RSObject[] ladder = Objects.findNearest(10, "Ladder");
         if(ladder.length < 1)
             return;

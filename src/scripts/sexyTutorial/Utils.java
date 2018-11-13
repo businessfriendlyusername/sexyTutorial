@@ -95,7 +95,7 @@ public class Utils {
     }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Navigation~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    public static void walkToSurvivalExpert(ABCUtil abc){
+    public static void walkToSurvivalExpert(){
         while (Utils.inGuideHouse())//we are inside of the guide house
         {
             Walking.walkTo(new RSTile(3096, 3107,0));
@@ -128,11 +128,6 @@ public class Utils {
             }, General.random(7000, 15000));
             Walking.walkTo(nearInstructor);
             General.sleep(150, 300);
-            if (abc.shouldExamineEntity()) {
-                abc.examineEntity();
-                General.sleep(1000, 1700);
-                Utils.flush();
-            }
         }
         Timing.waitCondition(new BooleanSupplier() {
             @Override
@@ -143,7 +138,7 @@ public class Utils {
         }, General.random(7000, 15000));
     }
 
-    public static void walkToCook(ABCUtil abc){
+    public static void walkToCook(){
         if(inCooksHouse())//we are already in the cooks house
             return;
         if(inSurvivalArea() || inGuideHouse()){//We're still in the starting area, walk through the gate to the cook
@@ -151,7 +146,7 @@ public class Utils {
 
             //we're not close to the survival expert or next to the gate
             if(!Utils.isNearSurvivalExpert() && !(Player.getPosition().distanceTo(nearGate) <= 1))
-                Utils.walkToSurvivalExpert(abc);
+                Utils.walkToSurvivalExpert();
 
             if(!(Player.getPosition().distanceTo(nearGate) <= 1)){//only walk to the gate if we're not there already
                 Walking.walkTo(nearGate);//infront of gate in survival area
@@ -219,11 +214,11 @@ public class Utils {
     }
 
     //please for the love of god fix webwalking on tutorial isle...
-    public static void walkToQuestGuide(ABCUtil abc) {
+    public static void walkToQuestGuide() {
         if(inQuestGuideHouse())
             return;
         if(!behindCooksHouse()){
-            walkToCook(abc);
+            walkToCook();
             RSObject[] door = Objects.findNearest(10, 9710);
             if(door.length < 1)
                 return;
@@ -290,11 +285,11 @@ public class Utils {
         //well that was a complete fucking nightmare...
     }
 
-    public static void walkToMiningInstructor(ABCUtil abc){
+    public static void walkToMiningInstructor(){
         if(isNearMiningInstructor())
             return;
         if(!inMiningArea()) {
-            walkToQuestGuide(abc);
+            walkToQuestGuide();
             RSObject[] ladder = Objects.findNearest(10, "Ladder");
             if(ladder.length < 1)
                 return;
@@ -310,29 +305,29 @@ public class Utils {
         WebWalking.walkTo(new RSTile(3080, 9505));
     }
 
-    public static void walkToCombatInstructor(ABCUtil abc){
+    public static void walkToCombatInstructor(){
         if(inCombatArea())
             return;
         else if(inRatCage())
             WebWalking.walkTo(new RSTile(3105, 9508));
         else {
-            walkToMiningInstructor(abc);
+            walkToMiningInstructor();
             WebWalking.walkTo(new RSTile(3105, 9508));
         }
 
     }
 
-    public static void walkToRatCage(ABCUtil abc){
+    public static void walkToRatCage(){
         if(!inRatCage()){
-            walkToCombatInstructor(abc);
+            walkToCombatInstructor();
             WebWalking.walkTo(new RSTile(3109, 9518));
         }
     }
 
-    public static void walkToOutsideBank(ABCUtil abc){
+    public static void walkToOutsideBank(){
         if(isOutsideBank())
             return;
-        walkToCombatInstructor(abc);
+        walkToCombatInstructor();
         WebWalking.walkTo(new RSTile(3111, 9525));
         RSObject[] ladder = Objects.findNearest(5, "Ladder");
         if(ladder.length < 1)
@@ -348,10 +343,10 @@ public class Utils {
         }, General.random(3000, 4000));
     }
 
-    public static void walkToBank(ABCUtil abc){
+    public static void walkToBank(){
         if(isInBank())
             return;
-        walkToOutsideBank(abc);
+        walkToOutsideBank();
         RSObject[] door = Objects.findNearest(20, "Large door");//the door infront of the bank can be closed, this is a problem
         if(door.length < 1)
             return;
@@ -373,8 +368,7 @@ public class Utils {
 
         Walking.walkTo(new RSTile(3121, 3123));
         General.sleep(700, 1400);
-        if(abc.shouldExamineEntity())
-            abc.examineEntity();
+
         Timing.waitCondition(new BooleanSupplier() {
             @Override
             public boolean getAsBoolean() {
@@ -384,10 +378,10 @@ public class Utils {
         }, General.random(10000, 15000));
     }
 
-    public static void walkToAccountGuide(ABCUtil abc){
+    public static void walkToAccountGuide(){
         if(inAccountRoom())
             return;
-        walkToBank(abc);
+        walkToBank();
         RSObject[] door = Objects.findNearest(10, 9721);
         if(door.length < 1)
             return;
@@ -402,11 +396,11 @@ public class Utils {
         }, General.random(7000, 10000));
     }
 
-    public static void walkToPriest(ABCUtil abc){
+    public static void walkToPriest(){
         if(isInChurch())
             return;
         if(!isBehindBank()){
-            walkToAccountGuide(abc);
+            walkToAccountGuide();
             RSObject[] door = Objects.findNearest(5, 9722);
             if(door.length < 1)
                 return;
@@ -439,11 +433,11 @@ public class Utils {
         }
     }
 
-    public static void walkToWizard(ABCUtil abc){
+    public static void walkToWizard(){
         if(isNearWizard())
             return;
         if(!behindChurch()){
-            walkToPriest(abc);
+            walkToPriest();
             RSObject[] door = Objects.findNearest(10, "Door");
             if(door.length < 1)
                 return;
