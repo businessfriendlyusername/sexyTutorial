@@ -60,7 +60,8 @@ public class Wizard extends Node {
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");
         General.sleep(1000, 2000);
-        NPCChat.selectOption("No. I'm not planning to do that.", true);
+        System.out.println("Not becoming an ironman...");
+        NPCChat.selectOption("No, I'm not planning to do that.", true);
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");
         General.sleep(1000, 2000);
@@ -68,6 +69,7 @@ public class Wizard extends Node {
         General.sleep(1000, 2000);
         NPCChat.getClickContinueInterface().click("Continue");
         General.sleep(1000, 2000);
+        System.out.println("Teleing to mainland....");
         NPCChat.getClickContinueInterface().click("Continue");
         General.sleep(10000, 15000);
     }

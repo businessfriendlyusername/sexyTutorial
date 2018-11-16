@@ -39,8 +39,8 @@ public class SurvivalInstructor extends Node {
             " graph icon near the inventory button to see your skills menu.";
 
     private final String skillsAndExp = "<col=0000ff>Skills and Experience</col><br>On this menu you can view your " +
-            "skills. Your skills can be leveled up by earning experience, which is is gained by performing various " +
-            "activites. As you level up your skills, you will earn new unlocks. Speak to the survival expert to continue.";
+            "skills. Your skills can be leveled up by earning experience, which is gained by performing various " +
+            "activities. As you level up your skills, you will earn new unlocks. Speak to the survival expert to continue.";
 
     private final String firemaking = "<col=0000ff>Firemaking</col><br>Now that you have some logs, it's time to " +
             "light a fire. First, click on the tinderbox in your inventory. Then, with the tinderbox highlighted, " +
@@ -99,10 +99,12 @@ public class SurvivalInstructor extends Node {
     }
 
     private void skillsAndExp(){
+        System.out.println("Taking to survival expert");
         if(Inventory.getAll().length > 26)//we don't have enough inventory space for the axe and tinderbox
             BInventory.dropAllExceptOne(dontDrop);
         if(!Utils.isNearSurvivalExpert())//we aren't close to the instructor
             Utils.walkToSurvivalExpert();
+        System.out.println("Talking to survival bitch now");
         Utils.talkTo("Survival Expert");
     }
 

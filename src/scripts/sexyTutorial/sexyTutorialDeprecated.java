@@ -967,7 +967,10 @@ public class sexyTutorialDeprecated extends Script{
     public void run(){
         while(true) {
             General.sleep(1000);
-            Interfaces.closeAll();
+            System.out.println(Interfaces.get(263, 1, 0).getText());
+            System.out.println("<col=0000ff>Skills and Experience</col><br>On this menu you can view your " +
+                    "skills. Your skills can be leveled up by earning experience, which is gained by performing various " +
+                    "activites. As you level up your skills, you will earn new unlocks. Speak to the survival expert to continue.");
         }
 
     }
